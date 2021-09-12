@@ -12,11 +12,15 @@
 - JIT (Just In Time) = MSIL => Binary
 
 C# -> Compiler -> Application MSIL 
+
 F# -> Compiler -> Application MSIL 
+
 VB -> Compiler -> Application MSIL 
 
-Application (MSIL) -- .NET Application              
-Library (MSIL)     -- .NET Framework (Library)  
+Application (MSIL) -- .NET Application
+
+Library (MSIL)     -- .NET Framework (Library)
+
 Virtual Machine    -- CLR (Common Language Runtume)
     
 S.O (Windows) | S.O (Linux)
