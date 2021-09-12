@@ -12,9 +12,7 @@
 - JIT (Just In Time) = MSIL => Binary
 
 C# -> Compiler -> Application MSIL 
-
 F# -> Compiler -> Application MSIL 
-
 VB -> Compiler -> Application MSIL 
 
 Application (MSIL) -- .NET Application
