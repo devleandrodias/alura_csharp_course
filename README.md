@@ -7,18 +7,15 @@
 - .NET Framework
 - ASP.NET
 - Entity Framework
+- JIT (Just In Time) = MSIL => Binary
 - MSIL (Microsoft Intermediate Language)
 - C & C++
-- JIT (Just In Time) = MSIL => Binary
 
-C# -> Compiler -> Application MSIL 
-F# -> Compiler -> Application MSIL 
-VB -> Compiler -> Application MSIL 
+C# -> Compiler -> Application MSIL<br/>
+F# -> Compiler -> Application MSIL<br/>
+VB -> Compiler -> Application MSIL<br/>
 
-Application (MSIL) -- .NET Application
-
-Library (MSIL)     -- .NET Framework (Library)
-
-Virtual Machine    -- CLR (Common Language Runtume)
-    
-S.O (Windows) | S.O (Linux)
+Application (MSIL) -- .NET Application<br/>
+Library (MSIL)     -- .NET Framework (Library)<br/>
+Virtual Machine    -- CLR (Common Language Runtume)<br/>
+System Operation   -- Windows / macOS / Linux
