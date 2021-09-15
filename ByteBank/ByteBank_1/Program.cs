@@ -6,12 +6,26 @@ namespace ByteBank_1
     {
         static void Main(string[] args)
         {
-            CheckingAccount checkingAccountLeandro = new();
+            CheckingAccount checkingAccountThaisa = new();
 
-            checkingAccountLeandro.Owner = "Leandro";
-            checkingAccountLeandro.Agency = 863;
-            checkingAccountLeandro.Number = 863146;
-            checkingAccountLeandro.Balance = 100;
+            checkingAccountThaisa.Owner = "Thaísa";
+            checkingAccountThaisa.Agency = 863;
+            checkingAccountThaisa.Number = 863642;
+            checkingAccountThaisa.Balance = 90.93;
+
+            CheckingAccount checkingAccountLeandro = new()
+            {
+                Owner = "Leandro",
+                Agency = 863,
+                Number = 863146,
+                Balance = 100,
+            };
+
+            Console.WriteLine(checkingAccountThaisa.Owner);
+
+            Console.WriteLine(checkingAccountLeandro.Owner);
+
+            Console.ReadLine();
         }
     }
 }
