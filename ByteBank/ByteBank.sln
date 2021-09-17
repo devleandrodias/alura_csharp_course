@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank_01", "ByteBank_1\ByteBank_01.csproj", "{9E2DF0AE-E59E-4789-A97B-3A1EF9FCA942}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteBank_01", "ByteBank_1\ByteBank_01.csproj", "{9E2DF0AE-E59E-4789-A97B-3A1EF9FCA942}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank_02", "ByteBank_2\ByteBank_02.csproj", "{1D608E46-95AD-4ED9-B528-91C9D1F5C280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteBank_02", "ByteBank_2\ByteBank_02.csproj", "{1D608E46-95AD-4ED9-B528-91C9D1F5C280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank_03", "ByteBank_03\ByteBank_03.csproj", "{0C5D88E9-7B5D-43DD-8F1D-5CBD8D873171}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteBank_03", "ByteBank_03\ByteBank_03.csproj", "{0C5D88E9-7B5D-43DD-8F1D-5CBD8D873171}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank_04", "ByteBank_04\ByteBank_04.csproj", "{EB2AB73D-FF32-4691-B4F4-46D811A4B2E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{0C5D88E9-7B5D-43DD-8F1D-5CBD8D873171}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C5D88E9-7B5D-43DD-8F1D-5CBD8D873171}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C5D88E9-7B5D-43DD-8F1D-5CBD8D873171}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB2AB73D-FF32-4691-B4F4-46D811A4B2E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2AB73D-FF32-4691-B4F4-46D811A4B2E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2AB73D-FF32-4691-B4F4-46D811A4B2E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2AB73D-FF32-4691-B4F4-46D811A4B2E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
