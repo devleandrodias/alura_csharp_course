@@ -8,6 +8,6 @@
 
         public double Salary { get; set; }
 
-        public double GetBonus() => Salary * 0.10;
+        public virtual double GetBonus() => Salary * 0.10;
     }
 }

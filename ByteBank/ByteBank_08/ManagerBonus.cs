@@ -11,11 +11,6 @@ namespace ByteBank_08
             _totalBonus += employee.GetBonus();
         }
 
-        public void Register(Director director)
-        {
-            _totalBonus += director.GetBonus();
-        }
-
         public double GetTotalBonus() => _totalBonus;
     } 
 }

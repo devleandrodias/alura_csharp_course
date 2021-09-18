@@ -9,7 +9,7 @@ namespace ByteBank_08
         {
             ManagerBonus manager = new();
 
-            Employee thaisa = new()
+            Employee thaisa = new Employee()
             {
                 Name = "Thaísa",
                 Cpf = "111.111.111-11",
@@ -18,7 +18,7 @@ namespace ByteBank_08
 
             manager.Register(thaisa);
 
-            Director leandro = new()
+            Employee leandro = new Director()
             {
                 Name = "Leandro",
                 Cpf = "111.111.111-11",
