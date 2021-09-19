@@ -1,13 +1,25 @@
 ﻿namespace ByteBank_08.Employees
 {
-    internal class Employee
+    internal abstract class Employee
     {
+        public Employee(string cpf, double salary)
+        {
+            Cpf = cpf;
+            Salary = salary;
+
+            TotalEmployees++;
+        }
+
+        public static int TotalEmployees { get; private set; }
+
         public string Name { get; set; }
 
-        public string Cpf { get; set; }
+        public string Cpf { get; private set; }
 
-        public double Salary { get; set; }
+        public double Salary { get; protected set; }
 
-        public virtual double GetBonus() => Salary * 0.10;
+        public abstract void IncreaseSalary();
+
+        public abstract double GetBonus();
     }
 }

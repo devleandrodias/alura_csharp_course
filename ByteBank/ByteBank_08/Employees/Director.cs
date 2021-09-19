@@ -2,9 +2,16 @@
 {
     internal class Director : Employee
     {
-        public override double GetBonus()
+        public Director(string cpf) : base(cpf, 5000)
         {
-            return (Salary * 0.20) + base.GetBonus();
-        } 
+
+        }
+
+        public override void IncreaseSalary()
+        {
+            Salary += Salary * 0.15;
+        }
+
+        public override double GetBonus() => Salary * 0.5;
     }
 }
