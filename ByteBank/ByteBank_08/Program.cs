@@ -77,12 +77,18 @@ namespace ByteBank_08
                 Password = "thaisa123"
             };
 
+            CommercialPartner nubank = new()
+            {
+                Password = "nubank123"
+            };
 
             InternalSystem.SignIn(leandro, "leandro123");
 
             InternalSystem.SignIn(leandro, "leandroABC");
 
             InternalSystem.SignIn(thaisa, "thaisa123");
+
+            InternalSystem.SignIn(nubank, "nubank123");
         }
     }
 }

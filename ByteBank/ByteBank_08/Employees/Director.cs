@@ -1,8 +1,6 @@
-﻿using ByteBank_08.Systems;
-
-namespace ByteBank_08.Employees
+﻿namespace ByteBank_08.Employees
 {
-    internal class Director : Authenticable
+    internal class Director : EmployeeAuthenticable
     {
         public Director(string cpf) : base(cpf, 5000)
         {

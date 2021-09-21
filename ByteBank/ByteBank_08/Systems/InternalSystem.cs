@@ -1,11 +1,11 @@
-﻿using ByteBank_08.Employees;
+﻿using ByteBank_08.Interfaces;
 using System;
 
 namespace ByteBank_08.Systems
 {
     internal static class InternalSystem
     {
-        public static bool SignIn(Authenticable employee, string password)
+        public static bool SignIn(IAuthenticable employee, string password)
         {
             bool isAuthenticated = employee.Authenticate(password);
 
