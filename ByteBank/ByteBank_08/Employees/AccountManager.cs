@@ -1,6 +1,8 @@
-﻿namespace ByteBank_08.Employees
+﻿using ByteBank_08.Systems;
+
+namespace ByteBank_08.Employees
 {
-    internal class AccountManager : Employee
+    internal class AccountManager : Authenticable
     {
         public AccountManager(string cpf) : base(cpf, 4000)
         {

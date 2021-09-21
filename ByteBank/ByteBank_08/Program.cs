@@ -1,4 +1,5 @@
 ﻿using ByteBank_08.Employees;
+using ByteBank_08.Systems;
 using System;
 
 namespace ByteBank_08
@@ -7,7 +8,9 @@ namespace ByteBank_08
     {
         static void Main(string[] args)
         {
-            CalculateBonus();
+            //CalculateBonus();
+
+            UseInternalSystem();
 
             Console.ReadLine();
         }
@@ -58,6 +61,28 @@ namespace ByteBank_08
 
             Console.WriteLine($"New salary {leandro.Salary:C2}");
 
+        }
+
+        public static void UseInternalSystem()
+        {
+            Director leandro = new("111.111.111-11")
+            {
+                Name = "Leandro",
+                Password = "leandro123"
+            };
+
+            AccountManager thaisa = new("222.222.222-22")
+            {
+                Name = "Thaisa",
+                Password = "thaisa123"
+            };
+
+
+            InternalSystem.SignIn(leandro, "leandro123");
+
+            InternalSystem.SignIn(leandro, "leandroABC");
+
+            InternalSystem.SignIn(thaisa, "thaisa123");
         }
     }
 }
