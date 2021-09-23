@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ByteBank_09.Exceptions;
+using System;
 
 namespace ByteBank_09
 {
@@ -22,34 +23,9 @@ namespace ByteBank_09
 
             Number = number;
 
-            try
-            {
-                TransactionFee = 30 / TotalAccount;
-            }
+            TotalAccount++;
 
-            catch (NullReferenceException e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-            }
-
-            catch (DivideByZeroException e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-                throw;
-            }
-
-            finally
-            {
-                TotalAccount++;
-            }
+            TransactionFee = 30 / TotalAccount;
         }
 
         public static int TotalAccount { get; private set; }
@@ -93,16 +69,19 @@ namespace ByteBank_09
             }
         }
 
-        public bool Withdraw(double value)
+        public void Withdraw(double value)
         {
+            if (value < 0)
+            {
+                throw new ArgumentException("Invalid value for withdrawal.", nameof(value));
+            }
+
             if (_balance < value)
             {
-                return false;
+                throw new InsufficientFundsException(Balance, value);
             }
 
             _balance -= value;
-
-            return true;
         }
 
         public void Deposit(double value)
@@ -110,18 +89,16 @@ namespace ByteBank_09
             _balance += value;
         }
 
-        public bool Transfer(double value, CheckingAccount accountDestiny)
+        public void Transfer(double value, CheckingAccount accountDestiny)
         {
-            if (_balance < value)
+            if (value < 0)
             {
-                return false;
+                throw new ArgumentException("Invalid value for transfer.", nameof(value));
             }
 
-            _balance -= value;
+            Withdraw(value);
 
             accountDestiny.Deposit(value);
-
-            return true;
         }
 
         public void ShowBalance()

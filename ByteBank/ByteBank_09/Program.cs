@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ByteBank_09.Exceptions;
+using System;
 
 namespace ByteBank_09
 {
@@ -8,21 +9,43 @@ namespace ByteBank_09
         {
             try
             {
-                CheckingAccount account = new(000, 0)
+                CheckingAccount account = new(0001, 2346)
                 {
-                    Balance = 11532.32,
                     Client = new Client
                     {
                         Cpf = "111.111.111-11",
                         Name = "Leandro",
-                        Job = "Dev. Backend .NET"
+                        Job = "Dev. Backend - .NET"
                     }
                 };
+
+                CheckingAccount account2 = new(0001, 2346)
+                {
+                    Client = new Client
+                    {
+                        Cpf = "2222.222.222-22",
+                        Name = "Thaísa",
+                        Job = "Dev. Frontend - React"
+                    }
+                };
+
+                account.Deposit(50);
+
+                account.ShowBalance();
+
+                account2.Deposit(120);
+
+                account2.Transfer(-100, account);
             }
 
             catch (ArgumentException ex)
             {
-                Console.WriteLine($"An invalid argument error occurred! {ex.ParamName}");
+                Console.WriteLine(ex.Message);
+            }
+
+            catch (InsufficientFundsException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
 
             catch (Exception ex)
