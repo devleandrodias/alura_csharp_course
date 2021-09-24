@@ -10,7 +10,7 @@ namespace AluraStore
 
         public ProductDAO()
         {
-            _connection = new SqlConnection("Password=uzumymwsql9432!;Persist Security Info=True;User ID=sa;Initial Catalog=AluraStore;Data Source=localhost,1433");
+            _connection = new SqlConnection("");
             _connection.Open();
         }
 

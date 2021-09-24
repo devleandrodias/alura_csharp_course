@@ -1,4 +1,6 @@
-﻿namespace AluraStore
+﻿using System;
+
+namespace AluraStore
 {
     class Program
     {
@@ -6,7 +8,25 @@
 
         static void Main(string[] args)
         {
-            PersistUsingAdoNet();
+            //PersistUsingAdoNet();
+
+            PersistUsingEntity();
+        }
+
+        private static void PersistUsingEntity()
+        {
+            Product p = new()
+            {
+                Name = "Harry Potter e a Ordem da Fênix - Entity",
+                Category = "Livros",
+                Price = 19.89
+            };
+
+            using StoreContext context = new();
+
+            context.Products.Add(p);
+
+            context.SaveChanges();
         }
 
         private static void PersistUsingAdoNet()
