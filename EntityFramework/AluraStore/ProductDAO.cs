@@ -10,7 +10,7 @@ namespace AluraStore
 
         public ProductDAO()
         {
-            _connection = new SqlConnection("");
+            _connection = new SqlConnection("Password=uzumymwsql9432!;Persist Security Info=True;User ID=sa;Initial Catalog=AluraStore;Data Source=localhost,1433");
             _connection.Open();
         }
 
@@ -104,9 +104,9 @@ namespace AluraStore
                 Product p = new();
 
                 p.Id = Convert.ToInt32(resultado["Id"]);
-                p.Name = Convert.ToString(resultado["Nome"]);
-                p.Category = Convert.ToString(resultado["Categoria"]);
-                p.Price = Convert.ToDouble(resultado["Preco"]);
+                p.Name = Convert.ToString(resultado["Name"]);
+                p.Category = Convert.ToString(resultado["Category"]);
+                p.Price = Convert.ToDouble(resultado["Price"]);
                 
                 lista.Add(p);
             }

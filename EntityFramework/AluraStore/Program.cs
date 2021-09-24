@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AluraStore
 {
@@ -10,7 +12,45 @@ namespace AluraStore
         {
             //PersistUsingAdoNet();
 
-            PersistUsingEntity();
+            // PersistUsingEntity();
+
+            // GetProductsUsingAdoNet();
+
+            GetProductsUsingEntity();
+        }
+
+        private static void GetProductsUsingEntity()
+        {
+            using StoreContext context = new();
+
+            IList<Product> products = context.Products.ToList();
+
+            foreach (Product product in products)
+            {
+                Console.WriteLine(product.Name);
+                Console.WriteLine(product.Price);
+                Console.WriteLine(product.Category);
+                Console.WriteLine("\n===================================\n");
+            }
+
+            Console.ReadLine();
+        }
+
+        private static void GetProductsUsingAdoNet()
+        {
+            using var repo = new ProductDAO();
+
+            IList<Product> products = repo.Products();
+
+            foreach (Product product in products)
+            {
+                Console.WriteLine(product.Name);
+                Console.WriteLine(product.Price);
+                Console.WriteLine(product.Category);
+                Console.WriteLine("\n===================================\n");
+            }
+
+            Console.ReadLine();
         }
 
         private static void PersistUsingEntity()
