@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AluraStore
 {
-    internal class ProductDAO : IDisposable
+    internal class ProductDAO : IDisposable, IProductDAO
     {
         private readonly SqlConnection _connection;
 
@@ -19,7 +19,7 @@ namespace AluraStore
             _connection.Close();
         }
 
-        internal void Add(Product p)
+        public void Add(Product p)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace AluraStore
             }
         }
 
-        internal void Update(Product p)
+        public void Update(Product p)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace AluraStore
             }
         }
 
-        internal void Remove(Product p)
+        public void Remove(Product p)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace AluraStore
             }
         }
 
-        internal IList<Product> Products()
+        public IList<Product> Products()
         {
             var lista = new List<Product>();
 

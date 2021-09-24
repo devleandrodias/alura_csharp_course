@@ -31,17 +31,15 @@ namespace AluraStore
 
         private static void UpdateProductUsingEntity()
         {
-            using StoreContext context = new();
+            using var repo = new ProductDAOEntity();
 
-            IList<Product> products = context.Products.ToList();
+            IList<Product> products = repo.Products();
 
             Product product = products.First();
 
             product.Price = 29.89;
 
-            context.Products.Update(product);
-
-            context.SaveChanges();
+            repo.Update(product);
         }
 
         private static void UpdateProductUsingAdoNet()
@@ -59,13 +57,11 @@ namespace AluraStore
 
         private static void RemoveProductUsingEntity()
         {
-            using StoreContext context = new();
+            using var repo = new ProductDAOEntity();
 
-            IList<Product> products = context.Products.ToList();
+            IList<Product> products = repo.Products();
 
-            context.Products.Remove(products.First());
-
-            context.SaveChanges();
+            repo.Remove(products.First());
         }
 
         private static void RemoveProductUsingAdoNet()
@@ -79,9 +75,9 @@ namespace AluraStore
 
         private static void GetProductsUsingEntity()
         {
-            using StoreContext context = new();
+            using var repo = new ProductDAOEntity();
 
-            IList<Product> products = context.Products.ToList();
+            IList<Product> products = repo.Products();
 
             foreach (Product product in products)
             {
@@ -115,16 +111,14 @@ namespace AluraStore
         {
             Product p = new()
             {
-                Name = "Harry Potter e a Ordem da Fênix - Entity",
+                Name = "Harry Potter e a Ordem da Fênix",
                 Category = "Livros",
                 Price = 19.89
             };
 
-            using StoreContext context = new();
+            using var repo = new ProductDAOEntity();
 
-            context.Products.Add(p);
-
-            context.SaveChanges();
+            repo.Add(p);
         }
 
         private static void PersistUsingAdoNet()
@@ -136,10 +130,9 @@ namespace AluraStore
                 Price = 19.89
             };
 
-            using (var repo = new ProductDAO())
-            {
-                repo.Add(p);
-            }
+            using var repo = new ProductDAO();
+
+            repo.Add(p);
         }
     }
 }
