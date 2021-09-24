@@ -8,6 +8,8 @@ namespace AluraStore
     {
         // ADO - Access Data Object
 
+        // CRUD - Create, Read, Update, Delete
+
         static void Main(string[] args)
         {
             PersistUsingAdoNet();
@@ -21,6 +23,38 @@ namespace AluraStore
             RemoveProductUsingAdoNet();
 
             RemoveProductUsingEntity();
+
+            UpdateProductUsingAdoNet();
+
+            UpdateProductUsingEntity();
+        }
+
+        private static void UpdateProductUsingEntity()
+        {
+            using StoreContext context = new();
+
+            IList<Product> products = context.Products.ToList();
+
+            Product product = products.First();
+
+            product.Price = 29.89;
+
+            context.Products.Update(product);
+
+            context.SaveChanges();
+        }
+
+        private static void UpdateProductUsingAdoNet()
+        {
+            using var repo = new ProductDAO();
+
+            IList<Product> products = repo.Products();
+
+            Product product = products.First();
+
+            product.Price = 39.89;
+
+            repo.Update(product);
         }
 
         private static void RemoveProductUsingEntity()
@@ -29,7 +63,7 @@ namespace AluraStore
 
             IList<Product> products = context.Products.ToList();
 
-            context.Products.Remove(products[0]);
+            context.Products.Remove(products.First());
 
             context.SaveChanges();
         }
@@ -40,7 +74,7 @@ namespace AluraStore
 
             IList<Product> products = repo.Products();
 
-            repo.Remove(products[0]);
+            repo.Remove(products.First());
         }
 
         private static void GetProductsUsingEntity()
