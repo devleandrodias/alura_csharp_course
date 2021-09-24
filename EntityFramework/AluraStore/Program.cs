@@ -10,13 +10,37 @@ namespace AluraStore
 
         static void Main(string[] args)
         {
-            //PersistUsingAdoNet();
+            PersistUsingAdoNet();
 
-            // PersistUsingEntity();
+            PersistUsingEntity();
 
-            // GetProductsUsingAdoNet();
+            GetProductsUsingAdoNet();
 
             GetProductsUsingEntity();
+
+            RemoveProductUsingAdoNet();
+
+            RemoveProductUsingEntity();
+        }
+
+        private static void RemoveProductUsingEntity()
+        {
+            using StoreContext context = new();
+
+            IList<Product> products = context.Products.ToList();
+
+            context.Products.Remove(products[0]);
+
+            context.SaveChanges();
+        }
+
+        private static void RemoveProductUsingAdoNet()
+        {
+            using var repo = new ProductDAO();
+
+            IList<Product> products = repo.Products();
+
+            repo.Remove(products[0]);
         }
 
         private static void GetProductsUsingEntity()
