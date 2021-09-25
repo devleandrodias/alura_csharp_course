@@ -1,4 +1,4 @@
-﻿namespace Strategy
+﻿namespace AluraDesignPatterns
 {
     internal class Budget
     {

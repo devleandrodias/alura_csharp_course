@@ -1,7 +1,7 @@
-﻿using Strategy.Interfaces;
+﻿using AluraDesignPatterns.Interfaces;
 using System;
 
-namespace Strategy
+namespace AluraDesignPatterns
 {
     internal class TaxCalculator
     {

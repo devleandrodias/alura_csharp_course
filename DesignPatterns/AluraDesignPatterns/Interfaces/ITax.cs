@@ -1,4 +1,4 @@
-﻿namespace Strategy.Interfaces
+﻿namespace AluraDesignPatterns.Interfaces
 {
     internal interface ITax
     {

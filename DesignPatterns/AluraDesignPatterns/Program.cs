@@ -1,8 +1,8 @@
-﻿using Strategy.Interfaces;
-using Strategy.Taxs;
+﻿using AluraDesignPatterns.Interfaces;
+using AluraDesignPatterns.Taxs;
 using System;
 
-namespace Strategy
+namespace AluraDesignPatterns
 {
     internal class Program
     {

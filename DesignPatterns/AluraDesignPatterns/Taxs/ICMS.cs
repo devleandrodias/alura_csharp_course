@@ -1,6 +1,6 @@
-﻿using Strategy.Interfaces;
+﻿using AluraDesignPatterns.Interfaces;
 
-namespace Strategy.Taxs
+namespace AluraDesignPatterns.Taxs
 {
     internal class ICMS : ITax
     {
