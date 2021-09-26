@@ -9,6 +9,13 @@ namespace AluraDesignPatterns
     {
         static void Main(string[] args)
         {
+            ChainOfResponsability();
+
+            Console.ReadLine();
+        }
+
+        private static void ChainOfResponsability()
+        {
             DiscountCalculator calculator = new();
 
             Budget budget = new(2000);
@@ -20,8 +27,6 @@ namespace AluraDesignPatterns
             double discount = DiscountCalculator.Calculate(budget);
 
             Console.WriteLine($"Discount: {discount:C2}");
-
-            Console.ReadLine();
         }
 
         private static void Strategy()
