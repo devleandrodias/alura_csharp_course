@@ -1,7 +1,7 @@
 ﻿using AluraDesignPatterns.Interfaces;
 using System;
 
-namespace AluraDesignPatterns
+namespace AluraDesignPatterns.Taxs
 {
     internal class TaxCalculator
     {
