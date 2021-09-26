@@ -1,12 +1,20 @@
-﻿using AluraDesignPatterns.Interfaces;
-
-namespace AluraDesignPatterns.Taxs
+﻿namespace AluraDesignPatterns.Taxs
 {
-    internal class ISS : ITax
+    internal class ISS : Tax
     {
-        public double Calculate(Budget budget)
+        public ISS() : base()
         {
-            return budget.Value * 0.06;
+
+        }
+
+        public ISS(Tax tax) : base(tax)
+        {
+
+        }
+
+        public override double Calculate(Budget budget)
+        {
+            return budget.Value * 0.06 + CalculateAnotherTax(budget);
         }
     }
 }

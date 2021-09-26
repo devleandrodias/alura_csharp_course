@@ -1,10 +1,11 @@
-﻿using AluraDesignPatterns.Interfaces;
-
-namespace AluraDesignPatterns.Taxs
+﻿namespace AluraDesignPatterns.Taxs
 {
-    internal abstract class TaxTemplate : ITax
+    internal abstract class TaxTemplate : Tax
     {
-        public double Calculate(Budget budget) => UseMaxTax(budget) ? MaxTax(budget) : MinTax(budget);
+        public override double Calculate(Budget budget)
+        {
+            return UseMaxTax(budget) ? MaxTax(budget) : MinTax(budget);
+        }
 
         public abstract bool UseMaxTax(Budget budget);
 

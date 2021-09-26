@@ -1,5 +1,4 @@
 ﻿using AluraDesignPatterns.Discounts;
-using AluraDesignPatterns.Interfaces;
 using AluraDesignPatterns.Taxs;
 using System;
 
@@ -9,7 +8,13 @@ namespace AluraDesignPatterns
     {
         static void Main(string[] args)
         {
-            ChainOfResponsability();
+            Tax iss = new ISS(new ICMS());
+
+            Budget budget = new(500);
+
+            double value = iss.Calculate(budget);
+
+            Console.Write(value);
 
             Console.ReadLine();
         }
@@ -31,9 +36,9 @@ namespace AluraDesignPatterns
 
         private static void Strategy()
         {
-            ITax iss = new ISS();
+            Tax iss = new ISS();
 
-            ITax icms = new ICMS();
+            Tax icms = new ICMS();
 
             Budget budget = new(500);
 

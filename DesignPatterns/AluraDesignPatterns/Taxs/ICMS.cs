@@ -1,12 +1,20 @@
-﻿using AluraDesignPatterns.Interfaces;
-
-namespace AluraDesignPatterns.Taxs
+﻿namespace AluraDesignPatterns.Taxs
 {
-    internal class ICMS : ITax
+    internal class ICMS : Tax
     {
-        public double Calculate(Budget budget)
+        public ICMS() : base()
         {
-            return budget.Value * 0.1;
+
+        }
+
+        public ICMS(Tax tax) : base(tax)
+        {
+
+        }
+
+        public override double Calculate(Budget budget)
+        {
+            return budget.Value * 0.1 + CalculateAnotherTax(budget);
         }
     }
 }
