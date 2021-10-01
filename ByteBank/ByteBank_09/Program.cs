@@ -1,11 +1,38 @@
 ﻿using ByteBank_09.Exceptions;
 using System;
+using System.IO;
 
 namespace ByteBank_09
 {
     internal class Program
     {
         static void Main(string[] args)
+        {
+            LoadAccountsByFile();
+
+            Console.ReadLine();
+        }
+
+        private static void LoadAccountsByFile()
+        {
+            try
+            {
+                using (ReadFiles reader = new("accounts.txt"))
+                {
+                    reader.ReadNextLine();
+                    reader.ReadNextLine();
+                    reader.ReadNextLine();
+                    reader.ReadNextLine();
+                };
+            }
+
+            catch (IOException)
+            {
+                Console.WriteLine("IOException...");
+            }
+        }
+
+        private static void TestInnerExecption()
         {
             try
             {
@@ -54,8 +81,6 @@ namespace ByteBank_09
             }
 
             Console.WriteLine(CheckingAccount.TransactionFee);
-
-            Console.ReadLine();
         }
     }
 }
