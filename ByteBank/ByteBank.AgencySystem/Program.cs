@@ -10,6 +10,8 @@ namespace ByteBank.AgencySystem
         {
             CheckingAccount checkingAccount = new(0001, 12893);
 
+            CheckingAccount account = new(011, 3423);
+
             AccountManager employee = new("111.111.111-11") { Name = "Leandro Dias" };
 
             Console.WriteLine(employee.Name);

@@ -3,10 +3,19 @@ using System;
 
 namespace ByteBank.Models
 {
+    /// <summary>
+    /// Define a Bytebank Checking Account
+    /// </summary>
     public class CheckingAccount
     {
         public static double TransactionFee { get; private set; }
 
+        /// <summary>
+        /// Create a checking account instance with the used arguments
+        /// </summary>
+        /// <param name="agency">Represents the value of the <see cref="Agency"> property and must have a value greater than zero</param>
+        /// <param name="number">Represents the value of the <see cref="Number"> property and must have a value greater than zero</param>
+        /// <exception cref="ArgumentException"></exception>
         public CheckingAccount(int agency, int number)
         {
             if (agency <= 0)
