@@ -12,6 +12,6 @@
             Salary *= 1.11;
         }
 
-        public override double GetBonus() => Salary * 0.17;
+        internal protected override double GetBonus() => Salary * 0.17;
     }
 }

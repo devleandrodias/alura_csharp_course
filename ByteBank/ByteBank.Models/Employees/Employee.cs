@@ -1,6 +1,6 @@
 ﻿namespace ByteBank.Models.Employees
 {
-    internal abstract class Employee
+    public abstract class Employee
     {
         public Employee(string cpf, double salary)
         {
@@ -20,6 +20,6 @@
 
         public abstract void IncreaseSalary();
 
-        public abstract double GetBonus();
+        internal protected abstract double GetBonus();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ByteBank.Models.Employees
 {
-    internal class AccountManager : EmployeeAuthenticable
+    public class AccountManager : EmployeeAuthenticable
     {
         public AccountManager(string cpf) : base(cpf, 4000)
         {
@@ -12,6 +12,6 @@
             Salary *= 1.05;
         }
 
-        public override double GetBonus() => Salary * 0.25;
+        internal protected override double GetBonus() => Salary * 0.25;
     }
 }

@@ -2,8 +2,10 @@
 
 namespace ByteBank.Models.Employees
 {
-    internal abstract class EmployeeAuthenticable : Employee, IAuthenticable
+    public abstract class EmployeeAuthenticable : Employee, IAuthenticable
     {
+        private readonly AuthenticationHelper _authenticationHelper = new();
+
         protected EmployeeAuthenticable(string cpf, double salary) : base(cpf, salary)
         {
 
@@ -11,6 +13,9 @@ namespace ByteBank.Models.Employees
 
         public string Password { get; set; }
 
-        public bool Authenticate(string password) => Password == password;
+        public bool Authenticate(string password)
+        {
+            return _authenticationHelper.ComparePasswords(Password, password);
+        }
     }
 }
