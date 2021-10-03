@@ -8,4 +8,8 @@
     <EnforceCodeStyleInBuild>False</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ByteBank_05\ByteBank_05.csproj" />
+  </ItemGroup>
+
 </Project>
