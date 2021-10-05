@@ -21,7 +21,13 @@ namespace ExamplesMongoDb
 
             // BookRepository.GetWithFilterClass();
 
-            BookRepository.GetWithFilterClassAndSort();
+            // BookRepository.GetWithFilterClassAndSort();
+
+            // BookRepository.Update();
+
+            // BookRepository.UpdateWithBuilder();
+
+            // BookRepository.Delete();
 
             Console.WriteLine("Finish...");
 

@@ -77,9 +77,9 @@ namespace ExamplesMongoDb
         {
             FilterDefinitionBuilder<Book> builder = Builders<Book>.Filter;
 
-            FilterDefinition<Book> filter = 
+            FilterDefinition<Book> filter =
                 builder.Eq(x => x.Author, "George R R Martin") &
-                builder.Gte(x => x.Pages, 500) & 
+                builder.Gte(x => x.Pages, 500) &
                 builder.AnyEq(x => x.Subjects, "Action");
 
             List<Book> books = _connector.Books.Find(filter).ToList();
@@ -108,6 +108,43 @@ namespace ExamplesMongoDb
             {
                 Console.WriteLine(book.ToJson());
             }
+        }
+
+        public static void Update()
+        {
+            List<Book> books = _connector.Books.Find(new BsonDocument()).ToList();
+
+            Book book = books[0];
+
+            book.Year = 2005;
+
+            _connector.Books.ReplaceOne((x => x.Id == book.Id), book);
+        }
+
+        public static void UpdateWithBuilder()
+        {
+            List<Book> books = _connector.Books.Find(new BsonDocument()).ToList();
+
+            FilterDefinitionBuilder<Book> builderFilter = Builders<Book>.Filter;
+
+            UpdateDefinitionBuilder<Book> builderUpdate = Builders<Book>.Update;
+
+            FilterDefinition<Book> filter = builderFilter.Eq(x => x.Title, "Harry Potter");
+
+            UpdateDefinition<Book> conditional = builderUpdate.Set(x => x.Year, 2021);
+
+            _connector.Books.UpdateOne(filter, conditional);
+        }
+
+        public static void Delete()
+        {
+            List<Book> books = _connector.Books.Find(new BsonDocument()).ToList();
+
+            FilterDefinitionBuilder<Book> builderFilter = Builders<Book>.Filter;
+
+            FilterDefinition<Book> filter = builderFilter.Eq(x => x.Title, "The Lord of the Rings");
+
+            _connector.Books.DeleteOne(filter);
         }
     }
 }
