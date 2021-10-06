@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteBank_08", "ByteBank_08\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteBank_09", "ByteBank_09\ByteBank_09.csproj", "{D444CBFD-585D-4E5C-B968-235E8A091874}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank.AgencySystem", "ByteBank.AgencySystem\ByteBank.AgencySystem.csproj", "{C7E6079D-C528-4F29-BB4D-F5BBB9CFC0E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteBank.AgencySystem", "ByteBank.AgencySystem\ByteBank.AgencySystem.csproj", "{C7E6079D-C528-4F29-BB4D-F5BBB9CFC0E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank.Models", "ByteBank.Models\ByteBank.Models.csproj", "{4C39602A-BCF6-4F6F-8244-41DFB6000BA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteBank.Models", "ByteBank.Models\ByteBank.Models.csproj", "{4C39602A-BCF6-4F6F-8244-41DFB6000BA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank_10", "ByteBank_10\ByteBank_10.csproj", "{2005255D-6BFC-483C-97CE-7B3501F40F32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{4C39602A-BCF6-4F6F-8244-41DFB6000BA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C39602A-BCF6-4F6F-8244-41DFB6000BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C39602A-BCF6-4F6F-8244-41DFB6000BA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2005255D-6BFC-483C-97CE-7B3501F40F32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2005255D-6BFC-483C-97CE-7B3501F40F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2005255D-6BFC-483C-97CE-7B3501F40F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2005255D-6BFC-483C-97CE-7B3501F40F32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
