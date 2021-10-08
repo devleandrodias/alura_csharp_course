@@ -8,6 +8,15 @@ namespace AluraDesignPatterns
     {
         static void Main(string[] args)
         {
+            Budget budget = new(500);
+
+            budget.ApplyExtraDiscount();
+
+            Console.ReadLine();
+        }
+
+        private static void Decorator()
+        {
             Tax iss = new ISS(new ICMS());
 
             Budget budget = new(500);
@@ -15,8 +24,6 @@ namespace AluraDesignPatterns
             double value = iss.Calculate(budget);
 
             Console.Write(value);
-
-            Console.ReadLine();
         }
 
         private static void ChainOfResponsability()

@@ -7,6 +7,7 @@ namespace AluraOnlineAuction.ConsoleApp
     {
         static void Main()
         {
+            // Arrange
             Auction auctionVanGogh = new("Van Gogh");
 
             Interested leandro = new("Leandro", auctionVanGogh);
@@ -20,9 +21,15 @@ namespace AluraOnlineAuction.ConsoleApp
             auctionVanGogh.ReceiveBid(leandro, 1000);
             auctionVanGogh.ReceiveBid(thaisa, 950);
 
+            // Act
             auctionVanGogh.FinishTradingSession();
 
-            Console.WriteLine($"{auctionVanGogh.Winner.Customer.Name} - {auctionVanGogh.Winner.Value}");
+            // Assert
+
+            int expectedValue = 1000;
+            int obtainedValue = auctionVanGogh.Winner.Value;
+
+            Console.WriteLine($"{auctionVanGogh.Winner.Customer.Name} - {obtainedValue}");
         }
     }
 }
