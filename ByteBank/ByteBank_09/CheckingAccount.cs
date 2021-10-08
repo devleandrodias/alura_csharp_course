@@ -105,5 +105,10 @@ namespace ByteBank_09
         {
             Console.WriteLine($"{_client.Name} - {_balance:C2}");
         }
+
+        public override string ToString()
+        {
+            return $"Owner: {Client.Name} - Number account: {Number} - Agency number: {Agency}";
+        }
     }
 }

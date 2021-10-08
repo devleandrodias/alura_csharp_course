@@ -8,9 +8,24 @@ namespace ByteBank_09
     {
         static void Main(string[] args)
         {
-            LoadAccountsByFile();
+            ToStringAndEquals();
 
             Console.ReadLine();
+        }
+
+        private static void ToStringAndEquals()
+        {
+            CheckingAccount account = new(0001, 21453);
+
+            Client client1 = new() { Cpf = "111.111.111-11", Name = "Leandro" };
+
+            account.Client = client1;
+
+            Client client2 = new() { Cpf = "111.111.111-11", Name = "Leandro" };
+
+            Console.WriteLine(account.ToString());
+
+            Console.WriteLine(client1.Equals(client2));
         }
 
         private static void LoadAccountsByFile()
