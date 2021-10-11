@@ -10,6 +10,13 @@ namespace ByteBank_11
             Console.ReadLine();
         }
 
+        private static void TestGenerics()
+        {
+            Generics.Print<int>(643);
+            Generics.Print<string>("Leandro");
+            Generics.Print<CheckingAccount>(new CheckingAccount(0001, 13532) { Client = new() { Name = "Leandro", Cpf = "111.111.111-11" } });
+        }
+
         private static void TestOptionalArgumentsAndParams()
         {
             OptionalAndParams.Optional();
@@ -86,6 +93,15 @@ namespace ByteBank_11
             Console.WriteLine($"LENGTH: {ages.Length}");
 
             Console.WriteLine($"AVG: {avg}");
+        }
+    }
+
+
+    internal class Generics
+    {
+        public static void Print<T>(T value)
+        {
+            Console.WriteLine(value);
         }
     }
 
