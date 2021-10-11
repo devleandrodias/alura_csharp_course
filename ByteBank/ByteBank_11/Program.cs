@@ -1,10 +1,47 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ByteBank_11
 {
     internal class Program
     {
         static void Main()
+        {
+            Console.ReadLine();
+        }
+
+        private static void TestOptionalArgumentsAndParams()
+        {
+            OptionalAndParams.Optional();
+            OptionalAndParams.Optional(13, 23);
+            OptionalAndParams.Optional(x: 12, y: 63);
+            OptionalAndParams.Optional(x: 13);
+            OptionalAndParams.Optional(y: 20);
+
+            OptionalAndParams.Params(
+                new CheckingAccount(0001, 2492837),
+                new CheckingAccount(0001, 2492837),
+                new CheckingAccount(0001, 2492837)
+            );
+
+            Console.WriteLine(OptionalAndParams.Sum(123, 23, 42, 65, 23, 13, 64, 34));
+        }
+
+        private static void TestListCheckingAccount()
+        {
+            List<CheckingAccount> accounts = new();
+
+            accounts.Add(new(0001, 42523));
+            accounts.Add(new(0001, 23456));
+            accounts.Add(new(0001, 53473));
+
+            foreach (CheckingAccount account in accounts)
+            {
+                Console.WriteLine($"Agency: {account.Number} - Number: {account.Number}");
+            }
+        }
+
+        private static void TestArrayCheckingAccount()
         {
             CheckingAccount[] accounts = new CheckingAccount[3]
             {
@@ -20,8 +57,6 @@ namespace ByteBank_11
 
                 Console.WriteLine($"Agency: {account.Number} - Number: {account.Number}");
             }
-
-            Console.ReadLine();
         }
 
         private static void TestArrayInt()
@@ -51,6 +86,34 @@ namespace ByteBank_11
             Console.WriteLine($"LENGTH: {ages.Length}");
 
             Console.WriteLine($"AVG: {avg}");
+        }
+    }
+
+    internal class OptionalAndParams
+    {
+        public static void Optional(int x = 10, int y = 5)
+        {
+            Console.WriteLine(x + y);
+        }
+
+        public static void Params(params CheckingAccount[] accounts)
+        {
+            foreach (CheckingAccount account in accounts)
+            {
+                Console.WriteLine($"Agency: {account.Number} - Number: {account.Number}");
+            }
+        }
+
+        public static int Sum(params int[] numbers)
+        {
+            int sum = 0;
+
+            foreach (int number in numbers)
+            {
+                sum += number;
+            }
+
+            return sum;
         }
     }
 }
