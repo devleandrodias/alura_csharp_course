@@ -2,6 +2,7 @@
 using ByteBank_12.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ByteBank_12
 {
@@ -10,6 +11,35 @@ namespace ByteBank_12
         static void Main(string[] args)
         {
             Console.ReadLine();
+        }
+
+        private static void TestOrderFilterAndLinq()
+        {
+            var accounts = new List<CheckingAccount>()
+            {
+                new (4536, 34576) {Client = new() {Name = "Leandro"}},
+                new (7435, 34074) {Client = new() {Name = "Beatriz"}},
+                new (8534, 97364) {Client = new() {Name = "Thaísa"}},
+                new (2346, 26384) {Client = new() {Name = "Ana"}},
+            };
+
+            var accountOrder = accounts.OrderBy(x => { return x.Client.Name; });
+
+            IOrderedEnumerable<CheckingAccount> accountFiltered = accounts
+                .Where(x => x.Agency < 5000)
+                .OrderBy(x => x.Agency);
+
+            foreach (var account in accountOrder)
+            {
+                Console.WriteLine(account);
+            }
+
+            Console.WriteLine();
+
+            foreach (var account in accountFiltered)
+            {
+                Console.WriteLine(account);
+            }
         }
 
         private static void TestSort()
