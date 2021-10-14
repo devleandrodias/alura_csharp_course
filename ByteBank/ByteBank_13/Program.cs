@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ByteBank_13
 {
@@ -9,6 +10,15 @@ namespace ByteBank_13
             string pathFile = "C:/Users/MiningRig/Desktop/Study/Alura/alura_csharp_course/files/accounts.txt";
 
             string pathNewFile = "C:/Users/MiningRig/Desktop/Study/Alura/alura_csharp_course/files/binary.txt";
+
+            string[] lines = File.ReadAllLines(pathFile);
+
+            Console.WriteLine(lines.Length);
+
+            foreach (string line in lines)
+            {
+                Console.WriteLine(line);
+            }
 
             Console.ReadLine();
         }
