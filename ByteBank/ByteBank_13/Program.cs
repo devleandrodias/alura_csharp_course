@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 
 namespace ByteBank_13
 {
@@ -10,7 +8,7 @@ namespace ByteBank_13
         {
             string pathFile = "C:/Users/MiningRig/Desktop/Study/Alura/alura_csharp_course/files/accounts.txt";
 
-            string pathNewFile = "C:/Users/MiningRig/Desktop/Study/Alura/alura_csharp_course/files/export_accounts_2.csv";
+            string pathNewFile = "C:/Users/MiningRig/Desktop/Study/Alura/alura_csharp_course/files/binary.txt";
 
             Console.ReadLine();
         }
