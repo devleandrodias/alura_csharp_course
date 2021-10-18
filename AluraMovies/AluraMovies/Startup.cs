@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace AluraMovies
 {
@@ -22,6 +23,8 @@ namespace AluraMovies
         {
             services.AddDbContext<MovieContext>(opt => 
                 opt.UseSqlServer(Configuration.GetConnectionString("MovieConnectionString")));
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
 

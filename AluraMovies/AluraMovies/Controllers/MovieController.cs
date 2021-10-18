@@ -1,6 +1,7 @@
 ﻿using AluraMovies.Data;
 using AluraMovies.Dtos;
 using AluraMovies.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,11 @@ namespace AluraMovies.Controllers
     {
         private readonly MovieContext _context;
 
-        public MovieController(MovieContext context)
+        private readonly IMapper _mapper;
+
+        public MovieController(MovieContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
@@ -40,10 +44,7 @@ namespace AluraMovies.Controllers
 
             if (movie == null) return NotFound();
 
-            movie.Title = movieDto.Title;
-            movie.Duration = movieDto.Duration;
-            movie.Director = movieDto.Director;
-            movie.Category = movieDto.Category;
+            movie = _mapper.Map(movieDto, movie);
 
             _context.SaveChanges();
 
@@ -67,13 +68,7 @@ namespace AluraMovies.Controllers
         [HttpPost]
         public ActionResult Add([FromBody] CreateMovieDto movieDto)
         {
-            Movie movie = new()
-            {
-                Title = movieDto.Title,
-                Category = movieDto.Category,
-                Director = movieDto.Director,
-                Duration = movieDto.Duration,
-            };
+            Movie movie = _mapper.Map<Movie>(movieDto);
 
             _context.Movies.Add(movie);
 
