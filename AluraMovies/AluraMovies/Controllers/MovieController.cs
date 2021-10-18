@@ -1,7 +1,7 @@
 ﻿using AluraMovies.Data;
+using AluraMovies.Dtos;
 using AluraMovies.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,16 +34,16 @@ namespace AluraMovies.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update([FromRoute] int id, [FromBody] Movie data)
+        public ActionResult Update([FromRoute] int id, [FromBody] UpdateMovieDto movieDto)
         {
             Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
 
             if (movie == null) return NotFound();
 
-            movie.Title = data.Title;
-            movie.Duration = data.Duration;
-            movie.Director = data.Director;
-            movie.Category = data.Category;
+            movie.Title = movieDto.Title;
+            movie.Duration = movieDto.Duration;
+            movie.Director = movieDto.Director;
+            movie.Category = movieDto.Category;
 
             _context.SaveChanges();
 
@@ -65,8 +65,16 @@ namespace AluraMovies.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add([FromBody] Movie movie)
+        public ActionResult Add([FromBody] CreateMovieDto movieDto)
         {
+            Movie movie = new()
+            {
+                Title = movieDto.Title,
+                Category = movieDto.Category,
+                Director = movieDto.Director,
+                Duration = movieDto.Duration,
+            };
+
             _context.Movies.Add(movie);
 
             _context.SaveChanges();
@@ -75,4 +83,3 @@ namespace AluraMovies.Controllers
         }
     }
 }
-
