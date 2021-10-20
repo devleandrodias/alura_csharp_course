@@ -11,5 +11,7 @@ namespace AluraMovies.Data
         }
 
         public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<Address> Address { get; set; }
     }
 }
