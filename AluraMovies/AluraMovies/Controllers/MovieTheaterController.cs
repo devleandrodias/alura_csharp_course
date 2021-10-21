@@ -22,9 +22,22 @@ namespace AluraMovies.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<MovieTheater>> Get()
+        public ActionResult<IEnumerable<MovieTheater>> Get([FromQuery] string movieName)
         {
-            return Ok(_context.MovieTheaters);
+            List<MovieTheater> movieTheaters = _context.MovieTheaters.ToList();
+
+            if (movieTheaters == null) return NotFound();
+
+            if (!string.IsNullOrEmpty(movieName))
+            {
+                IEnumerable<MovieTheater> query = from movieTheater in movieTheaters
+                                                  where movieTheater.Sessions.Any(x => x.Movie.Title == movieName)
+                                                  select movieTheater;
+
+                movieTheaters = query.ToList();
+            }
+
+            return Ok(movieTheaters);
         }
 
         [HttpGet("{id}")]

@@ -22,9 +22,20 @@ namespace AluraMovies.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Movie>> Get()
+        public ActionResult<IEnumerable<Movie>> Get([FromQuery] string category)
         {
-            return Ok(_context.Movies);
+            if (string.IsNullOrEmpty(category))
+            {
+                return Ok(_context.Movies);
+            }
+
+            List<Movie> movies = _context.Movies
+                .Where(x => x.Category.ToUpper() == category.ToUpper())
+                .ToList();
+
+            if (movies == null) return NotFound();
+
+            return Ok(movies);
         }
 
         [HttpGet("{id}")]
