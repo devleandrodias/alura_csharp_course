@@ -14,6 +14,7 @@ namespace Caelum.Stella.CSharp.Inwords
 
         protected Moeda(double numeroOrigem) : base(numeroOrigem)
         {
+
         }
 
         protected override double PreparaNumeroOrigem(double numeroOrigem)
@@ -32,10 +33,14 @@ namespace Caelum.Stella.CSharp.Inwords
         private void MontarCentavos(StringBuilder builder)
         {
             double centavos = Math.Round((numeroOrigem - Math.Truncate(numeroOrigem)) * 100);
+
+
             if (centavos > 0)
             {
                 if (numeroOrigem >= 1.0)
+                {
                     builder.Append(ResourceManagerHelper.Instance.ResourceManager.GetString("Extensosep"));
+                }
 
                 BuildNumeroCentavos(centavos, builder);
                 builder.Append(" ");
@@ -45,10 +50,8 @@ namespace Caelum.Stella.CSharp.Inwords
 
         private void MontarInteiros(StringBuilder builder)
         {
-            if (numeroOrigem < 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
+            if (numeroOrigem < 0) throw new ArgumentOutOfRangeException();
+
             else if (numeroOrigem >= 1.0 || numeroOrigem == 0)
             {
                 BuildNumeroMoeda(numeroOrigem, builder);
@@ -78,7 +81,6 @@ namespace Caelum.Stella.CSharp.Inwords
             else
                 builder.Append(MoedaSingular);
         }
-
 
         private void BuildNumeroCentavos(double centavos, StringBuilder builder)
         {

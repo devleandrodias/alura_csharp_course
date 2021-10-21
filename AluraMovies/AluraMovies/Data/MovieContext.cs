@@ -16,6 +16,12 @@ namespace AluraMovies.Data
                 .HasOne(x => x.MovieTheater)
                 .WithOne(x => x.Address)
                 .HasForeignKey<MovieTheater>(x => x.AddressId);
+
+            builder.Entity<MovieTheater>()
+                .HasOne(x => x.Manager)
+                .WithMany(x => x.MoviesTheaters)
+                .HasForeignKey(x => x.ManagerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<Movie> Movies { get; set; }
@@ -23,5 +29,7 @@ namespace AluraMovies.Data
         public DbSet<Address> Address { get; set; }
 
         public DbSet<MovieTheater> MovieTheaters { get; set; }
+
+        public DbSet<Manager> Managers { get; set; }
     }
 }

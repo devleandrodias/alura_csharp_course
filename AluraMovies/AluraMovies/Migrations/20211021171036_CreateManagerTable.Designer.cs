@@ -3,14 +3,16 @@ using AluraMovies.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AluraMovies.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20211021171036_CreateManagerTable")]
+    partial class CreateManagerTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,9 +100,6 @@ namespace AluraMovies.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ManagerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60)
@@ -110,8 +109,6 @@ namespace AluraMovies.Migrations
 
                     b.HasIndex("AddressId")
                         .IsUnique();
-
-                    b.HasIndex("ManagerId");
 
                     b.ToTable("MovieTheaters");
                 });
@@ -124,25 +121,12 @@ namespace AluraMovies.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AluraMovies.Models.Manager", "Manager")
-                        .WithMany("MoviesTheaters")
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Address");
-
-                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("AluraMovies.Models.Address", b =>
                 {
                     b.Navigation("MovieTheater");
-                });
-
-            modelBuilder.Entity("AluraMovies.Models.Manager", b =>
-                {
-                    b.Navigation("MoviesTheaters");
                 });
 #pragma warning restore 612, 618
         }
