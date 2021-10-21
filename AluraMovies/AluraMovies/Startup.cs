@@ -21,8 +21,9 @@ namespace AluraMovies
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MovieContext>(opt => 
-                opt.UseSqlServer(Configuration.GetConnectionString("MovieConnectionString")));
+            services.AddDbContext<MovieContext>(opt => opt
+                .UseLazyLoadingProxies()
+                .UseSqlServer(Configuration.GetConnectionString("MovieConnectionString")));
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

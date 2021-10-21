@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace AluraMovies.Models
 {
@@ -15,5 +16,8 @@ namespace AluraMovies.Models
 
         [Required, Range(1, 10000)]
         public int Number { get; set; }
+
+        [JsonIgnore]
+        public virtual MovieTheater MovieTheater { get; set; }
     }
 }

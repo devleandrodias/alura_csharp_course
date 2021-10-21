@@ -6,5 +6,7 @@ namespace AluraMovies.Dtos
     {
         [Required, StringLength(60, ErrorMessage = "Movie theater can contain a maximum of 60 characters")]
         public string Name { get; set; }
+        
+        public int AddressId { get; set; }
     }
 }

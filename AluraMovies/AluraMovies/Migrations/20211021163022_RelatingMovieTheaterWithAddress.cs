@@ -1,0 +1,46 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace AluraMovies.Migrations
+{
+    public partial class RelatingMovieTheaterWithAddress : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AddColumn<int>(
+                name: "AddressId",
+                table: "MovieTheaters",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovieTheaters_AddressId",
+                table: "MovieTheaters",
+                column: "AddressId",
+                unique: true);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_MovieTheaters_Address_AddressId",
+                table: "MovieTheaters",
+                column: "AddressId",
+                principalTable: "Address",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_MovieTheaters_Address_AddressId",
+                table: "MovieTheaters");
+
+            migrationBuilder.DropIndex(
+                name: "IX_MovieTheaters_AddressId",
+                table: "MovieTheaters");
+
+            migrationBuilder.DropColumn(
+                name: "AddressId",
+                table: "MovieTheaters");
+        }
+    }
+}
