@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace AluraMovies.Models
 {
@@ -20,5 +22,8 @@ namespace AluraMovies.Models
 
         [Range(1, 400, ErrorMessage = "Duration must be between 1 and 400 minutes")]
         public int Duration { get; set; }
+
+        [JsonIgnore]
+        public virtual List<Session> Sessions { get; set; }
     }
 }

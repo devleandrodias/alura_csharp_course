@@ -22,6 +22,16 @@ namespace AluraMovies.Data
                 .WithMany(x => x.MoviesTheaters)
                 .HasForeignKey(x => x.ManagerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Session>()
+                .HasOne(x => x.Movie)
+                .WithMany(x => x.Sessions)
+                .HasForeignKey(x => x.MovieId);
+
+            builder.Entity<Session>()
+                .HasOne(x => x.MovieTheater)
+                .WithMany(x => x.Sessions)
+                .HasForeignKey(x => x.MovieTheaterId);
         }
 
         public DbSet<Movie> Movies { get; set; }
@@ -31,5 +41,7 @@ namespace AluraMovies.Data
         public DbSet<MovieTheater> MovieTheaters { get; set; }
 
         public DbSet<Manager> Managers { get; set; }
+
+        public DbSet<Session> Sessions { get; set; }
     }
 }

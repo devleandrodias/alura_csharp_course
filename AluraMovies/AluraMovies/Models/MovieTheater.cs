@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace AluraMovies.Models
@@ -18,5 +19,8 @@ namespace AluraMovies.Models
         public virtual Manager Manager { get; set; }
 
         public int ManagerId { get; set; }
+
+        [JsonIgnore]
+        public virtual List<Session> Sessions { get; set; }
     }
 }
