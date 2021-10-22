@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AluraMovies.Dtos
+namespace AluraMovies.Dtos.Session
 {
     public class CreateSessionDto
     {

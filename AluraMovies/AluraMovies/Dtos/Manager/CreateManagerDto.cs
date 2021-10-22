@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AluraMovies.Dtos
+namespace AluraMovies.Dtos.Manager
 {
     public class CreateManagerDto
     {

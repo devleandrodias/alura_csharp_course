@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AluraMovies.Dtos
+namespace AluraMovies.Dtos.Address
 {
-    public class CreateAddressDto
+    public class UpdateAddressDto
     {
         [Required, StringLength(60)]
         public string Street { get; set; }

@@ -1,7 +1,4 @@
-﻿using AluraMovies.Models;
-using System.Collections.Generic;
-
-namespace AluraMovies.Dtos
+﻿namespace AluraMovies.Dtos.Manager
 {
     public class ReadManagerDto
     {

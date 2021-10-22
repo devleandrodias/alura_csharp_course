@@ -1,5 +1,5 @@
 ﻿using AluraMovies.Data;
-using AluraMovies.Dtos;
+using AluraMovies.Dtos.Session;
 using AluraMovies.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;

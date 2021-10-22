@@ -1,4 +1,4 @@
-﻿using AluraMovies.Dtos;
+﻿using AluraMovies.Dtos.Manager;
 using AluraMovies.Models;
 using AutoMapper;
 using System.Linq;

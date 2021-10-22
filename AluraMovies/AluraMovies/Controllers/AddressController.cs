@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using AluraMovies.Models;
 using System.Linq;
-using AluraMovies.Dtos;
+using AluraMovies.Dtos.Address;
 
 namespace AluraMovies.Controllers
 {

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AluraMovies.Dtos
+namespace AluraMovies.Dtos.Movie
 {
-    public class UpdateMovieDto
+    public class CreateMovieDto
     {
         [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }

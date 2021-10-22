@@ -1,15 +1,14 @@
-﻿using AluraMovies.Models;
-using System;
+﻿using System;
 
-namespace AluraMovies.Dtos
+namespace AluraMovies.Dtos.Session
 {
     public class ReadSessionDto
     {
         public int Id { get; set; }
 
-        public MovieTheater MovieTheater { get; set; }
+        public Models.MovieTheater MovieTheater { get; set; }
 
-        public Movie Movie { get; set; }
+        public Models.Movie Movie { get; set; }
 
         public DateTime ClosingTime { get; set; }
 
