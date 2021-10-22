@@ -1,54 +1,43 @@
-﻿using AluraMovies.Data;
-using AluraMovies.Dtos.Manager;
+﻿using AluraMovies.Dtos.Manager;
 using AluraMovies.Models;
-using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AluraMovies.Controllers
 {
     [ApiController, Route("v1/manager")]
     public class ManagerController : ControllerBase
     {
-        private readonly MovieContext _context;
+        private readonly ManagerService _service;
 
-        private readonly IMapper _mapper;
-
-        public ManagerController(MovieContext context, IMapper mapper)
+        public ManagerController(ManagerService service)
         {
-            _context = context;
-            _mapper = mapper;
+            _service = service;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Manager>> Get()
         {
-            return Ok(_context.Managers);
+            return Ok(_service.Get());
         }
 
         [HttpGet("{id}")]
         public ActionResult<ReadManagerDto> GetById([FromRoute] int id)
         {
-            Manager manager = _context.Managers.FirstOrDefault(x => x.Id.Equals(id));
+            ReadManagerDto manager = _service.GetById(id);
 
             if (manager == null) return NotFound();
 
-            ReadManagerDto dto = _mapper.Map<ReadManagerDto>(manager);
-
-            return Ok(dto);
+            return Ok(manager);
         }
 
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
         {
-            Manager manager = _context.Managers.FirstOrDefault(x => x.Id.Equals(id));
+            Result result = _service.Delete(id);
 
-            if (manager == null) return NotFound();
-
-            _context.Managers.Remove(manager);
-
-            _context.SaveChanges();
+            if (result.IsFailed) return NotFound();
 
             return NoContent();
         }
@@ -56,13 +45,9 @@ namespace AluraMovies.Controllers
         [HttpPut("{id}")]
         public ActionResult Update([FromRoute] int id, [FromBody] UpdateManagerDto dto)
         {
-            Manager manager = _context.Managers.FirstOrDefault(x => x.Id.Equals(id));
+            Result result = _service.Update(id, dto);
 
-            if (manager == null) return NotFound();
-
-            manager = _mapper.Map(dto, manager);
-
-            _context.SaveChanges();
+            if (result == null) return NotFound();
 
             return NoContent();
         }
@@ -70,13 +55,9 @@ namespace AluraMovies.Controllers
         [HttpPost]
         public ActionResult Create([FromBody] CreateManagerDto dto)
         {
-            Manager manager = _mapper.Map<Manager>(dto);
+            ReadManagerDto readDto = _service.Create(dto);
 
-            _context.Managers.Add(manager);
-
-            _context.SaveChanges();
-
-            return CreatedAtAction(nameof(GetById), new { Id = manager.Id }, manager);
+            return CreatedAtAction(nameof(GetById), new { readDto.Id }, readDto);
         }
     }
 }

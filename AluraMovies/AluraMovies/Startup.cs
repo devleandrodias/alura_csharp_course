@@ -1,4 +1,6 @@
+using AluraMovies.Controllers;
 using AluraMovies.Data;
+using AluraMovies.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,12 @@ namespace AluraMovies
                 .UseSqlServer(Configuration.GetConnectionString("MovieConnectionString")));
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<MovieService, MovieService>();
+            services.AddScoped<ManagerService, ManagerService>();
+            services.AddScoped<AddressService, AddressService>();
+            services.AddScoped<SessionService, SessionService>();
+            services.AddScoped<MovieTheaterService, MovieTheaterService>();
 
             services.AddControllers();
 

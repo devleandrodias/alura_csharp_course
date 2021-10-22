@@ -1,63 +1,47 @@
-﻿using AluraMovies.Data;
-using AluraMovies.Dtos.Movie;
-using AluraMovies.Models;
-using AutoMapper;
+﻿using AluraMovies.Dtos.Movie;
+using AluraMovies.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AluraMovies.Controllers
 {
     [ApiController, Route("v1/movie")]
     public class MovieController : ControllerBase
     {
-        private readonly MovieContext _context;
+        private readonly MovieService _service;
 
-        private readonly IMapper _mapper;
-
-        public MovieController(MovieContext context, IMapper mapper)
+        public MovieController(MovieService service)
         {
-            _mapper = mapper;
-            _context = context;
+            _service = service;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Movie>> Get([FromQuery] string category)
+        public ActionResult<List<ReadMovieDto>> Get([FromQuery] string category)
         {
-            if (string.IsNullOrEmpty(category))
-            {
-                return Ok(_context.Movies);
-            }
+            List<ReadMovieDto> readDto = _service.Get(category);
 
-            List<Movie> movies = _context.Movies
-                .Where(x => x.Category.ToUpper() == category.ToUpper())
-                .ToList();
+            if (readDto.Count == 0) return NotFound();
 
-            if (movies == null) return NotFound();
-
-            return Ok(movies);
+            return Ok(readDto);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Movie> GetById([FromRoute] int id)
+        public ActionResult<ReadMovieDto> GetById([FromRoute] int id)
         {
-            Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            ReadMovieDto readDto = _service.GetById(id);
 
-            if (movie != null) return Ok();
+            if (readDto == null) return NotFound();
 
-            return NotFound();
+            return Ok(readDto);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update([FromRoute] int id, [FromBody] UpdateMovieDto movieDto)
+        public ActionResult Update([FromRoute] int id, [FromBody] UpdateMovieDto dto)
         {
-            Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            Result result = _service.Update(id, dto);
 
-            if (movie == null) return NotFound();
-
-            movie = _mapper.Map(movieDto, movie);
-
-            _context.SaveChanges();
+            if (result.IsFailed) return NotFound();
 
             return NoContent();
         }
@@ -65,27 +49,19 @@ namespace AluraMovies.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
         {
-            Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            Result result = _service.Delete(id);
 
-            if (movie == null) return NotFound();
-
-            _context.Movies.Remove(movie);
-
-            _context.SaveChanges();
+            if (result.IsFailed) return NotFound();
 
             return NoContent();
         }
 
         [HttpPost]
-        public ActionResult Add([FromBody] CreateMovieDto movieDto)
+        public ActionResult Add([FromBody] CreateMovieDto dto)
         {
-            Movie movie = _mapper.Map<Movie>(movieDto);
+            ReadMovieDto readDto = _service.Add(dto);
 
-            _context.Movies.Add(movie);
-
-            _context.SaveChanges();
-
-            return CreatedAtAction(nameof(GetById), new { Id = movie.Id }, movie);
+            return CreatedAtAction(nameof(GetById), new { readDto.Id }, readDto);
         }
     }
 }

@@ -1,52 +1,44 @@
-﻿using AluraMovies.Data;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using AluraMovies.Models;
-using System.Linq;
 using AluraMovies.Dtos.Address;
+using FluentResults;
+using AluraMovies.Services;
 
 namespace AluraMovies.Controllers
 {
     [ApiController, Route("v1/address")]
     public class AddressController : ControllerBase
     {
-        private readonly MovieContext _context;
+        private readonly AddressService _service;
 
-        private readonly IMapper _mapper;
-
-        public AddressController(MovieContext context, IMapper mapper)
+        public AddressController(AddressService service)
         {
-            _context = context;
-            _mapper = mapper;
+            _service = service;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Address>> Get()
+        public ActionResult<IEnumerable<ReadAddressDto>> Get()
         {
-            return Ok(_context.Address);
+            return Ok(_service.Get());
         }
 
         [HttpGet("{id}")]
         public ActionResult<Address> GetById([FromRoute] int id)
         {
-            Address address = _context.Address.FirstOrDefault(x => x.Id == id);
+            ReadAddressDto readDto = _service.GetById(id);
 
-            if (address == null) return NotFound();
+            if (readDto == null) return NotFound();
 
-            return Ok(address);
+            return Ok(readDto);
         }
 
         [HttpPut("{id}")]
         public ActionResult Update([FromRoute] int id, [FromBody] UpdateAddressDto dto)
         {
-            Address address = _context.Address.FirstOrDefault(x => x.Id == id);
+            Result result = _service.Update(id, dto);
 
-            if (address == null) return NotFound();
-
-            address = _mapper.Map(dto, address);
-
-            _context.SaveChanges();
+            if (result.IsFailed) return NotFound();
 
             return NoContent();
         }
@@ -54,27 +46,19 @@ namespace AluraMovies.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
         {
-            Address address = _context.Address.FirstOrDefault(x => x.Id == id);
+            Result result = _service.Delete(id);
 
-            if (address == null) return NotFound();
-
-            _context.Address.Remove(address);
-
-            _context.SaveChanges();
+            if (result.IsFailed) return NotFound();
 
             return NoContent();
         }
 
         [HttpPost]
-        public ActionResult Add([FromBody] CreateAddressDto dto)
+        public ActionResult Create([FromBody] CreateAddressDto dto)
         {
-            Address address = _mapper.Map<Address>(dto);
+            ReadAddressDto readDto = _service.Create(dto);
 
-            _context.Address.Add(address);
-
-            _context.SaveChanges();
-
-            return CreatedAtAction(nameof(GetById), new { Id = address.Id }, address);
+            return CreatedAtAction(nameof(GetById), new { readDto.Id }, readDto);
         }
     }
 }

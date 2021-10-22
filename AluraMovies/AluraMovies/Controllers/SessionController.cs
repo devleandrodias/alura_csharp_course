@@ -1,54 +1,44 @@
-﻿using AluraMovies.Data;
-using AluraMovies.Dtos.Session;
+﻿using AluraMovies.Dtos.Session;
 using AluraMovies.Models;
-using AutoMapper;
+using AluraMovies.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AluraMovies.Controllers
 {
     [ApiController, Route("v1/session")]
     public class SessionController : ControllerBase
     {
-        private readonly MovieContext _context;
+        private readonly SessionService _service;
 
-        private readonly IMapper _mapper;
-
-        public SessionController(MovieContext context, IMapper mapper)
+        public SessionController(SessionService service)
         {
-            _context = context;
-            _mapper = mapper;
+            _service = service;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Session>> Get()
         {
-            return Ok(_context.Sessions);
+            return Ok(_service.Get());
         }
 
         [HttpGet("{id}")]
         public ActionResult<ReadSessionDto> GetById([FromRoute] int id)
         {
-            Session session = _context.Sessions.FirstOrDefault(x => x.Id.Equals(id));
+            ReadSessionDto session = _service.GetById(id);
 
             if (session == null) return NotFound();
 
-            ReadSessionDto dto = _mapper.Map<ReadSessionDto>(session);
-
-            return Ok(dto);
+            return Ok(session);
         }
 
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
         {
-            Session session = _context.Sessions.FirstOrDefault(x => x.Id.Equals(id));
+            Result result = _service.Delete(id);
 
-            if (session == null) return NotFound();
-
-            _context.Sessions.Remove(session);
-
-            _context.SaveChanges();
+            if (result.IsFailed) return NotFound();
 
             return NoContent();
         }
@@ -56,13 +46,9 @@ namespace AluraMovies.Controllers
         [HttpPut("{id}")]
         public ActionResult Update([FromRoute] int id, [FromBody] CreateSessionDto dto)
         {
-            Session session = _context.Sessions.FirstOrDefault(x => x.Id.Equals(id));
+            Result result = _service.Update(id, dto);
 
-            if (session == null) return NotFound();
-
-            session = _mapper.Map(dto, session);
-
-            _context.SaveChanges();
+            if (result.IsFailed) return NotFound();
 
             return NoContent();
         }
@@ -70,13 +56,9 @@ namespace AluraMovies.Controllers
         [HttpPost]
         public ActionResult Create([FromBody] CreateSessionDto dto)
         {
-            Session session = _mapper.Map<Session>(dto);
+            ReadSessionDto readDto = _service.Create(dto);
 
-            _context.Sessions.Add(session);
-
-            _context.SaveChanges();
-
-            return CreatedAtAction(nameof(GetById), new { session.Id }, session);
+            return CreatedAtAction(nameof(GetById), new { readDto.Id }, readDto);
         }
     }
 }

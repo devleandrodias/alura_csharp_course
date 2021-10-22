@@ -10,6 +10,7 @@ namespace AluraMovies.Profiles
         {
             CreateMap<CreateMovieTheaterDto, MovieTheater>();
             CreateMap<UpdateMovieTheaterDto, MovieTheater>();
+            CreateMap<MovieTheater, ReadMovieTheaterDto>();
         }
     }
 }
