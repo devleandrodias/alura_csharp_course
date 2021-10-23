@@ -2,6 +2,7 @@
 using AluraAuth.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace AluraAuth.Controllers
 {
@@ -22,7 +23,7 @@ namespace AluraAuth.Controllers
 
             if (result.IsFailed) return StatusCode(500);
 
-            return Ok();
+            return Ok(result.Successes);
         }
 
         [HttpPost("sign-in")]
@@ -44,5 +45,24 @@ namespace AluraAuth.Controllers
 
             return Ok(result.Successes);
         }
+    
+        [HttpPost("confirm-email")]
+        public ActionResult AuthConfirmEmail(ConfirmEmailDto dto)
+        {
+            Result result = _authService.ConfirmEmail(dto);
+
+            if (result.IsFailed) return StatusCode(500);
+
+            return Ok(result.Successes);
+        }
+    }
+
+    public class ConfirmEmailDto
+    {
+        [Required]
+        public int UserId { get; set; }
+
+        [Required]
+        public string ConfirmCode { get; set; }
     }
 }

@@ -1,8 +1,10 @@
-﻿using AluraAuth.Dtos;
+﻿using AluraAuth.Controllers;
+using AluraAuth.Dtos;
 using AluraAuth.Models;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -40,7 +42,9 @@ namespace AluraAuth.Services
 
             if (!result.Result.Succeeded) return Result.Fail("Sign up fail!");
 
-            return Result.Ok();
+            string confirmationCode = _userManager.GenerateEmailConfirmationTokenAsync(userIdentity).Result;
+
+            return Result.Ok().WithSuccess(confirmationCode);
         }
 
         public Result SignIn(SignInDto dto)
@@ -58,12 +62,23 @@ namespace AluraAuth.Services
 
             return Result.Ok().WithSuccess(token.Value);
         }
-    
+
         public Result SignOut()
         {
             Task result = _signInManager.SignOutAsync();
 
             if (!result.IsCompletedSuccessfully) return Result.Fail("Sign out fail!");
+
+            return Result.Ok();
+        }
+
+        public Result ConfirmEmail(ConfirmEmailDto dto)
+        {
+            IdentityUser<int> identityUser = _userManager.Users.FirstOrDefault(x => x.Id.Equals(dto.UserId));
+
+            IdentityResult identityResult = _userManager.ConfirmEmailAsync(identityUser, dto.ConfirmCode).Result;
+
+            if (!identityResult.Succeeded) return Result.Fail("Confirm e-mail fail!");
 
             return Result.Ok();
         }

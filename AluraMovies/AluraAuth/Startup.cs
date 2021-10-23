@@ -26,8 +26,9 @@ namespace AluraAuth
             services.AddDbContext<UserDbContext>(opt => opt
                     .UseSqlServer(Configuration.GetConnectionString("MovieConnectionString")));
 
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
-                    .AddEntityFrameworkStores<UserDbContext>();
+            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(opt => opt.SignIn.RequireConfirmedEmail = true)
+                    .AddEntityFrameworkStores<UserDbContext>()
+                    .AddDefaultTokenProviders();
 
             services.AddScoped<AuthService, AuthService>();
             services.AddScoped<TokenService, TokenService>();
