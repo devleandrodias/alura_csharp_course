@@ -29,7 +29,8 @@ namespace AluraAuth
             services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
                     .AddEntityFrameworkStores<UserDbContext>();
 
-            services.AddScoped<SignUpService, SignUpService>();
+            services.AddScoped<AuthService, AuthService>();
+            services.AddScoped<TokenService, TokenService>();
 
             services.AddControllers();
 
