@@ -1,5 +1,4 @@
-﻿using AluraAuth.Controllers;
-using AluraAuth.Dtos;
+﻿using AluraAuth.Dtos;
 using AluraAuth.Models;
 using AutoMapper;
 using FluentResults;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace AluraAuth.Services
 {
@@ -20,16 +20,20 @@ namespace AluraAuth.Services
 
         private readonly TokenService _tokenService;
 
+        private readonly EmailService _emailService;
+
         public AuthService(
             IMapper mapper,
             UserManager<IdentityUser<int>> userManager,
             SignInManager<IdentityUser<int>> signInManager,
-            TokenService tokenService)
+            TokenService tokenService, 
+            EmailService emailService)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _emailService = emailService;
         }
 
         public Result SignUp(SignUpDto dto)
@@ -44,7 +48,11 @@ namespace AluraAuth.Services
 
             string confirmationCode = _userManager.GenerateEmailConfirmationTokenAsync(userIdentity).Result;
 
-            return Result.Ok().WithSuccess(confirmationCode);
+            _emailService.SendEmail(new[] { userIdentity.Email }, "Confirmation link", userIdentity.Id, confirmationCode);
+
+            string encodedCode = HttpUtility.UrlEncode(confirmationCode);
+
+            return Result.Ok().WithSuccess(encodedCode);
         }
 
         public Result SignIn(SignInDto dto)
@@ -76,7 +84,7 @@ namespace AluraAuth.Services
         {
             IdentityUser<int> identityUser = _userManager.Users.FirstOrDefault(x => x.Id.Equals(dto.UserId));
 
-            IdentityResult identityResult = _userManager.ConfirmEmailAsync(identityUser, dto.ConfirmCode).Result;
+            IdentityResult identityResult = _userManager.ConfirmEmailAsync(identityUser, dto.ConfirmationCode).Result;
 
             if (!identityResult.Succeeded) return Result.Fail("Confirm e-mail fail!");
 

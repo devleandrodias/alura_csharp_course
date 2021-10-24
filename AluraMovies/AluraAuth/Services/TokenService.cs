@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AluraAuth.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,6 +11,13 @@ namespace AluraAuth.Services
 {
     public class TokenService
     {
+        private readonly IConfiguration _configuration;
+
+        public TokenService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public Token CreateToken(IdentityUser<int> user)
         {
             Claim[] claims = new[]
@@ -17,7 +26,9 @@ namespace AluraAuth.Services
                 new Claim("username", user.UserName),
             };
 
-            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes("9F92ECC234C304535E11291DF26BA6D995ED7CF7694FBED030EED9130A2489C8"));
+            string privateKey = _configuration.GetValue<string>("Secret:PrivateKey");
+
+            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(privateKey));
 
             SigningCredentials signingCredentials = new(key, SecurityAlgorithms.HmacSha256);
 

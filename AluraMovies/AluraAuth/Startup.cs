@@ -31,6 +31,7 @@ namespace AluraAuth
                     .AddDefaultTokenProviders();
 
             services.AddScoped<AuthService, AuthService>();
+            services.AddScoped<EmailService, EmailService>();
             services.AddScoped<TokenService, TokenService>();
 
             services.AddControllers();

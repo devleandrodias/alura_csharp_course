@@ -1,4 +1,4 @@
-﻿namespace AluraAuth.Services
+﻿namespace AluraAuth.Models
 {
     public class Token
     {

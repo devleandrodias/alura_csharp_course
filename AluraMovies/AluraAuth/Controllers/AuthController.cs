@@ -2,7 +2,6 @@
 using AluraAuth.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace AluraAuth.Controllers
 {
@@ -46,8 +45,8 @@ namespace AluraAuth.Controllers
             return Ok(result.Successes);
         }
     
-        [HttpPost("confirm-email")]
-        public ActionResult AuthConfirmEmail(ConfirmEmailDto dto)
+        [HttpGet("confirm-email")]
+        public ActionResult AuthConfirmEmail([FromQuery] ConfirmEmailDto dto)
         {
             Result result = _authService.ConfirmEmail(dto);
 
@@ -55,14 +54,5 @@ namespace AluraAuth.Controllers
 
             return Ok(result.Successes);
         }
-    }
-
-    public class ConfirmEmailDto
-    {
-        [Required]
-        public int UserId { get; set; }
-
-        [Required]
-        public string ConfirmCode { get; set; }
     }
 }
