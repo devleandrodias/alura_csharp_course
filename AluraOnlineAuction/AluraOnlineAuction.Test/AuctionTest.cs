@@ -1,32 +1,13 @@
 ﻿using AluraOnlineAuction.Core;
 using System;
+using Xunit;
 
-namespace AluraOnlineAuction.ConsoleApp
+namespace AluraOnlineAuction.Test
 {
-    internal class Program
+    public class AuctionTest
     {
-        private static void Verify(double expected, double obtained)
-        {
-            ConsoleColor color = Console.ForegroundColor;
-
-            if (expected == obtained)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-
-                Console.WriteLine("TEST OK");
-            }
-
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-
-                Console.WriteLine($"TEST FAIL! \nExpected: {expected}\nObtained: {obtained}");
-            }
-
-            Console.ForegroundColor = color;
-        }
-
-        private static void AuctionWithMultipleBids()
+        [Fact]
+        public void AuctionWithMultipleBids()
         {
             // Arrange
             Auction auctionVanGogh = new("Van Gogh");
@@ -46,10 +27,11 @@ namespace AluraOnlineAuction.ConsoleApp
             auctionVanGogh.FinishTradingSession();
 
             // Assert
-            Verify(1000, auctionVanGogh.Winner.Value);
+            Assert.Equal(1000, auctionVanGogh.Winner.Value);
         }
 
-        private static void AuctionEithOnlyOneBid()
+        [Fact]
+        public void AuctionEithOnlyOneBid()
         {
             // Arrange
             Auction auctionVanGogh = new("Van Gogh");
@@ -64,16 +46,7 @@ namespace AluraOnlineAuction.ConsoleApp
             auctionVanGogh.FinishTradingSession();
 
             // Assert
-            Verify(800, auctionVanGogh.Winner.Value);
-        }
-
-        static void Main()
-        {
-            AuctionWithMultipleBids();
-
-            AuctionEithOnlyOneBid();
-
-            Console.ReadLine();
+            Assert.Equal(800, auctionVanGogh.Winner.Value);
         }
     }
 }
