@@ -4,9 +4,22 @@ using System.Collections.Generic;
 
 namespace AluraStore
 {
-    internal class ProductDAO : IDisposable, IProductDAO
+    internal class ProductDAO : IDisposable, IProductDAOADO
     {
         private readonly SqlConnection _connection;
+
+        internal class ProductADO
+        {
+            public int Id { get; internal set; }
+            public string Name { get; internal set; }
+            public string Category { get; internal set; }
+            public double Price { get; internal set; }
+
+            public override string ToString()
+            {
+                return $"Product {Id}, {Name} - {Category}, {Price}";
+            }
+        }
 
         public ProductDAO()
         {
@@ -19,7 +32,7 @@ namespace AluraStore
             _connection.Close();
         }
 
-        public void Add(Product p)
+        public void Add(ProductADO p)
         {
             try
             {
@@ -44,7 +57,7 @@ namespace AluraStore
             }
         }
 
-        public void Update(Product p)
+        public void Update(ProductADO p)
         {
             try
             {
@@ -70,7 +83,7 @@ namespace AluraStore
             }
         }
 
-        public void Remove(Product p)
+        public void Remove(ProductADO p)
         {
             try
             {
@@ -89,9 +102,9 @@ namespace AluraStore
             }
         }
 
-        public IList<Product> Products()
+        public IList<ProductADO> Products()
         {
-            var lista = new List<Product>();
+            var lista = new List<ProductADO>();
 
             var selectCmd = _connection.CreateCommand();
 
@@ -101,7 +114,7 @@ namespace AluraStore
 
             while (resultado.Read())
             {
-                Product p = new();
+                ProductADO p = new();
 
                 p.Id = Convert.ToInt32(resultado["Id"]);
                 p.Name = Convert.ToString(resultado["Name"]);

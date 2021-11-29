@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using static AluraStore.ProductDAO;
 
 namespace AluraStore
 {
@@ -11,5 +12,16 @@ namespace AluraStore
         void Remove(Product product);
 
         IList<Product> Products();
+    }
+
+    internal interface IProductDAOADO
+    {
+        void Add(ProductADO product);
+
+        void Update(ProductADO product);
+
+        void Remove(ProductADO product);
+
+        IList<ProductADO> Products();
     }
 }
