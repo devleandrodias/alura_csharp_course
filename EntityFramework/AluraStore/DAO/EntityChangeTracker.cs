@@ -1,7 +1,9 @@
-﻿using System;
+﻿using AluraStore.DAO;
+using AluraStore.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using static AluraStore.ProductDAO;
+using static AluraStore.DAO.ProductDAO;
 
 namespace AluraStore
 {

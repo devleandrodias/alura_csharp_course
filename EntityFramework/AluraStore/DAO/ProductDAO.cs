@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using AluraStore.Interfaces;
 
-namespace AluraStore
+namespace AluraStore.DAO
 {
     internal class ProductDAO : IDisposable, IProductDAOADO
     {
@@ -42,7 +43,7 @@ namespace AluraStore
                 var paramName = new SqlParameter("name", p.Name);
                 insertCmd.Parameters.Add(paramName);
 
-                var paramCategory= new SqlParameter("category", p.Category);
+                var paramCategory = new SqlParameter("category", p.Category);
                 insertCmd.Parameters.Add(paramCategory);
 
                 var paramPrice = new SqlParameter("price", p.Price);
@@ -120,7 +121,7 @@ namespace AluraStore
                 p.Name = Convert.ToString(resultado["Name"]);
                 p.Category = Convert.ToString(resultado["Category"]);
                 p.Price = Convert.ToDouble(resultado["Price"]);
-                
+
                 lista.Add(p);
             }
 

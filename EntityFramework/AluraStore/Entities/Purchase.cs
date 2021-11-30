@@ -1,4 +1,4 @@
-﻿namespace AluraStore
+﻿namespace AluraStore.Entities
 {
     internal class Purchase
     {

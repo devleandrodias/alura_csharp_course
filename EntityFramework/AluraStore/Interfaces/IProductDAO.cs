@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using static AluraStore.ProductDAO;
+﻿using AluraStore.Entities;
+using System.Collections.Generic;
+using static AluraStore.DAO.ProductDAO;
 
-namespace AluraStore
+namespace AluraStore.Interfaces
 {
     internal interface IProductDAO
     {

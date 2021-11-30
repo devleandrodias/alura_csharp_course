@@ -1,8 +1,11 @@
-﻿using System;
+﻿using AluraStore.Data;
+using AluraStore.Entities;
+using AluraStore.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AluraStore
+namespace AluraStore.DAO
 {
     internal class ProductDAOEntity : IDisposable, IProductDAO
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AluraStore
+namespace AluraStore.Entities
 {
     public class Product
     {

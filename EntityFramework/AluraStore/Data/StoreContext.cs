@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AluraStore.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace AluraStore
+namespace AluraStore.Data
 {
     internal class StoreContext : DbContext
     {

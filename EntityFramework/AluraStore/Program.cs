@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AluraStore.Data;
+using AluraStore.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace AluraStore
