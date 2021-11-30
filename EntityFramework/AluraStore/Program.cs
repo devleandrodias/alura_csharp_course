@@ -7,7 +7,27 @@ namespace AluraStore
     {
         static void Main(string[] args)
         {
-            ManyToMany();
+            OneToOne();
+        }
+
+        private static void OneToOne()
+        {
+            Customer customer = new()
+            {
+                Name = "Leandro",
+                DeliveryAddress = new()
+                {
+                    Stree = "Faria Lima",
+                    Number = "AP 23 - 5 Andar",
+                    Complement = "Next to MacDonnald"
+                }
+            };
+
+            using StoreContext context = new();
+
+            context.Customers.Add(customer);
+
+            context.SaveChanges();
         }
 
         private static void OneToMany()
