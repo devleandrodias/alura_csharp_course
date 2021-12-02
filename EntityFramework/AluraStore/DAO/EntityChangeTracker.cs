@@ -11,7 +11,7 @@ namespace AluraStore
 
     // CRUD - Create, Read, Update, Delete
 
-    partial class Program
+    public partial class Program
     {
         private static void UpdateProductUsingEntity()
         {
